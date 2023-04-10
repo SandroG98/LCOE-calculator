@@ -5,7 +5,7 @@ Functions
 -------
 crf(interest, years)
     Calculates the capital recovery factor
-fcost(invest, crf, T)
+fcost(invest, crf, other, T)
     Calculates the fixed costs
 fuel(cost, hw, etha)
     Calculates the fuel costs
@@ -17,6 +17,7 @@ lcoe(costfix, costvariable)
     calculates the levelized cost of electricity for the power plant
 """
 
+
 def crf(interest, years):
     """
     Calculates the capital recovery factor
@@ -25,19 +26,20 @@ def crf(interest, years):
     :param years: Specifies the years for the crf
     :return: capital recovery factor
     """
-    return 0
+    return (pow((1 + interest), years*interest))/(pow((1 + interest), years) - 1)
 
 
-def fcost(invest, crf, T):
+def fcost(invest, crf, other, T):
     """
     Calculates the fixed costs
 
-    :param invest: Initial investment costs for the power plant in €
+    :param invest: Initial investment costs for the power plant in €/MW
     :param crf: Capital recovery factor for that investment
+    :param other: Other fixed costs in €/MW
     :param T: Specifies the full load hours in h/a
     :return: fixed costs in €/MWh
     """
-    return 0
+    return (crf * invest + other)/T
 
 
 def fuel(cost, hw=1, etha=1):
@@ -49,7 +51,7 @@ def fuel(cost, hw=1, etha=1):
     :param etha: Specifies efficiency factor of the technology
     :return: fuel costs in €/MWh
     """
-    return 0
+    return (cost/(hw * etha)) * pow(10, 3)
 
 
 def co2price(co2, emissionf=0, etha=1):
@@ -61,7 +63,8 @@ def co2price(co2, emissionf=0, etha=1):
     :param etha: Specifies efficiency factor of the technology
     :return: price of emitted co2 in €/MWh
     """
-    return 0
+    return (co2 * emissionf)/etha
+
 
 def vcost(co2p, fp, other):
     """
@@ -83,4 +86,4 @@ def lcoe(costfix, costvariable):
       :param costvariable: variable cost €/MWh
       :return: Caclulated LCOE
       """
-    return fcost + vcost
+    return costfix + costvariable
