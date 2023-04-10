@@ -26,7 +26,7 @@ def crf(interest, years):
     :param years: Specifies the years for the crf
     :return: capital recovery factor
     """
-    return (pow((1 + interest), years)*interest)/(pow((1 + interest), years) - 1)
+    return (pow((1 + interest), years)*interest)/(pow((1 + interest), years) - 1) + 7
 
 
 def fcost(invest, crf, other, T):
