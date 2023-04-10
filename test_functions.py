@@ -1,5 +1,5 @@
 '''
-File for testing the functions module q
+File for testing the functions module
 '''
 
 import functions as func
