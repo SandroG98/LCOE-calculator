@@ -11,7 +11,7 @@ fuel(cost, hw, etha)
     Calculates the fuel costs
 co2price(co2, emissionf, etha)
     Calculates the costs of the emitted co2
-vcost(co2p, fp, other)
+vcost(co2c, fc, other=0)
     Calculates the variable costs
 lcoe(costfix, costvariable)
     calculates the levelized cost of electricity for the power plant
@@ -26,7 +26,7 @@ def crf(interest, years):
     :param years: Specifies the years for the crf
     :return: capital recovery factor
     """
-    return (pow((1 + interest), years*interest))/(pow((1 + interest), years) - 1)
+    return (pow((1 + interest), years)*interest)/(pow((1 + interest), years) - 1)
 
 
 def fcost(invest, crf, other, T):
@@ -66,16 +66,16 @@ def co2price(co2, emissionf=0, etha=1):
     return (co2 * emissionf)/etha
 
 
-def vcost(co2p, fp, other):
+def vcost(co2c, fc, other=0):
     """
     Calculates the variable costs
 
-    :param co2p: Price of co2 emitted in €/MWh
-    :param fp: Price of fuel in €/MWh
+    :param co2p: Cost of co2 emitted in €/MWh
+    :param fp: Cost of fuel in €/MWh
     :param other: Specifies other variable costs in €/MWh
     :return: variable costs in €/MWh
     """
-    return fcost + vcost + other
+    return co2c + fc + other
 
 
 def lcoe(costfix, costvariable):
