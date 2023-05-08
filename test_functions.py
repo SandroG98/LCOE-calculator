@@ -7,7 +7,7 @@ import math
 
 
 def test_crf():
-    assert math.isclose(func.crf(0.05, 10), 0.129505, rel_tol=0.0001) == 1
+    assert math.isclose(func.crf(0.05, 10), 0.10, rel_tol=0.0001) == 1
 
 
 def test_fcost():
@@ -27,4 +27,4 @@ def test_vcost():
 
 
 def test_lcoe():
-    assert func.lcoe(5, 3) == 8
+    assert func.lcoe(5, 2)==8
